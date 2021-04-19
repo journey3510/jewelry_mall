@@ -34,7 +34,7 @@
 
         <div style="margin-bottom: 15px;">
           <span>￥</span>
-          <span>{{ goodsDetail.price }}</span>
+          <span>{{ parseInt(goodsDetail.price).toFixed(2) }}</span>
         </div>
       </div>
     </div>
@@ -59,10 +59,11 @@
 
     <!-- 底部导航 -->
     <van-goods-action>
-      <van-goods-action-icon icon="shop-o" text="首页" to="/"  />
+      <van-goods-action-icon icon="shop-o" text="首页" to="/" />
       <van-goods-action-icon icon="cart-o" text="购物车" to="/cart" />
-      <van-goods-action-button type="warning" text="加入购物车" @click="showBaseFun" />
-      <van-goods-action-button type="danger" text="立即购买" @click="showBaseFun" />
+      <van-goods-action-button v-if="goodsDetail.status == 1" type="warning" text="加入购物车" @click="showBaseFun" />
+      <van-goods-action-button v-if="goodsDetail.status == 1" type="danger" text="立即购买" @click="showBaseFun" />
+      <van-goods-action-button v-else type="danger" text="已下架" color="#ccc" disabled />
     </van-goods-action>
 
     <div class="goods-title">
@@ -71,6 +72,10 @@
     </div>
 
     <!-- 商品评价  -->
+    <p
+      v-if="access.length == 0"
+      style="width: 90%;background: #fff;margin: 0 auto 10px;padding: 5px 5px;"
+    >暂无</p>
     <div v-for="(item,index) in access" :key="index" class="access">
       <div class="access-user">
         <div class="access-head">
@@ -82,13 +87,13 @@
           >
         </div>
         <div class="access-name">
-          <span>{{ item.username }}</span>
+          <p style="margin-bottom: 5px;">{{ item.username }}</p>
           <p>{{ item.add_time | timestampToTime }}</p>
           <!-- <van-rate v-model="item.branch" style="z-index: -1 !important" /> -->
         </div>
       </div>
       <div class="access-text">
-        <span style="font-size: 14px;margin: 10px 30px 10px 30px;">{{ item.text }}</span>
+        <p style="font-size: 14px;">{{ item.text }}</p>
       </div>
     </div>
     <hr>
@@ -175,8 +180,8 @@ export default {
     ...mapGetters(['guid'])
   },
   created() {
+    parseInt
     const { id } = this.$route.params
-
     this.productId = id
     if (typeof (id) === 'undefined') {
       this.productId = JSON.parse(localStorage.getItem('productId'))
@@ -414,7 +419,14 @@ export default {
 
 .access-text {
   margin-top: 12px;
-  margin-left: 10px;
+  margin-left: 50px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: #fff;
+  padding: 5px 5px;
+  // line-break: ;
+  word-break: break-all;
+
 }
 
 .price {

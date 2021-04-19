@@ -34,3 +34,12 @@ export function register(data) {
     data
   })
 }
+
+export function addComment(data) {
+  return request({
+    url: '/api/client/user/comment/add',
+    method: 'post',
+    data
+  })
+}
+

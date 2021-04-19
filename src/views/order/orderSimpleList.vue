@@ -24,17 +24,37 @@
             :key="index1"
             class="order-product-simple"
           >
-            <div class="order-product-simple-img">
+            <div class="order-product-simple-img" @click="toGoods(child.item_guid)">
               <img :src="child.item_info.item_img" height="80" width="80" alt="">
               <a>{{ child.item_info.name }}</a>
             </div>
             <div class="order-product-number">
-              <a style="color: red;font-weight: bolder" class="order-product-price">&yen;
-                {{ child.item_info.price }}</a>
-              <br>
-              <br>
-              <a>X {{ child.quantity }}</a>
+              <div>
+                <p style="color: red;font-weight: bolder" class="order-product-price">
+                  &yen;
+                  {{ child.item_info.price }}
+                </p>
+
+                <br>
+                <a>X {{ child.quantity }}</a>
+              </div>
+
+              <div v-if="items.status == 4" class="evaluation_div">
+                <van-button
+                  v-if="child.commentStatus == undefined"
+                  class="evaluation_btn"
+                  type="default"
+                  @click="evaluation(child.item_guid, items.order_num)"
+                >评价</van-button>
+                <van-button
+                  v-else
+                  class="evaluation_btn"
+                  type="default"
+                  @click="evaluation(child.item_guid, items.order_num)"
+                >已评</van-button>
+              </div>
             </div>
+            <!--  -->
           </div>
 
           <div v-if="items.status == 1" :class="items.status == 1 ? 'order-product-count':'order-need-to-pay'">
@@ -62,7 +82,6 @@
             <a style="color: red;font-weight: bolder">{{ }}</a>
             <span>{{ items.total_num }}件商品,共付额:</span>
             <a style="color: red;font-weight: bolder">&yen;{{ items.money }}</a>
-            <van-button v-if="items.status == 4" class="pay-button" type="default" color="#DD1A21" @click="evaluation(items.order_num)">去评价</van-button>
           </div>
 
         </div>
@@ -168,6 +187,12 @@ export default {
         this.loading = false
       })
     },
+    toGoods(item_guid) {
+      this.$router.push({
+        name: 'detail',
+        params: { id: item_guid }
+      })
+    },
 
     getListParams() {
       this.active = this.$route.params.active
@@ -205,8 +230,16 @@ export default {
         }
       })
     },
-    evaluation(order_num) {
-      Toast('正在开发中')
+    evaluation(item_guid, order_num) {
+      // Toast('正在开发中')
+
+      this.$router.push({ path: '/message',
+        query: {
+          order_num,
+          item_guid
+        }
+
+      })
     },
     beforeChange(index) {
     },
@@ -222,7 +255,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="less" scoped>
 
 .order-table {
   background-color: white;
@@ -235,30 +268,51 @@ export default {
 .order-product-simple {
   height: 105px;
   background-color: #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .order-product-number {
-  width: 25%;
+  // width: 30%;
   float: left;
   height: 50%;
   text-align: right;
   margin-top: 30px;
+  margin-right: 7px;
+
+  /*  */
+  display: flex;
+  justify-content: flex-end;
+
+  .evaluation_div {
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    .evaluation_btn {
+      // width: 50px;
+      height: 25px;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+  }
 
 }
 
 .order-product-price {
-  padding-top: 20px;
+  /* padding-top: 20px; */
 }
 
 .order-product-simple-img {
-  width: 70%;
+  // width: 65%;
   padding-top: 14px;
   padding-left: 3%;
-  float: left;
+  // float: left;
 
 }
 
-.order-product-number a {
+.order-product-number p {
   font-size: 14px;
 
 }

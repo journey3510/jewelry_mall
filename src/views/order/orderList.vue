@@ -47,7 +47,6 @@ export default {
 
   data() {
     return {
-      status: 0,
       list: [],
       timer: '',
       loading: false,
@@ -69,7 +68,9 @@ export default {
   },
   methods: {
     getListParams() {
-      this.active = this.$route.params.active
+      if (this.$route.params.active !== '0') {
+        this.active = parseInt(this.$route.params.active)
+      }
     },
     handleLoad() {
       this.timer = new Date().getTime()
@@ -78,7 +79,21 @@ export default {
 
     },
     beforeChange(index) {
-      this.status = index
+      this.active = index
+
+      // this.$router.push({
+      //   params: merge(this.$route.params, { 'id': '1' })
+      // })
+
+      // const params = Object.assign({ active: index }, this.$route.params)
+
+      this.$router.push({
+        params: {
+          active: index
+        }
+      })
+
+      // this.$route.params.active = index
     }
   }
 }

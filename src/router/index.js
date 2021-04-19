@@ -20,6 +20,7 @@ const routes = [
     name: 'Home',
     component: () => import('../views/Home'),
     meta: {
+
       layout: true,
       head: true,
       headReturn: false,
@@ -53,6 +54,7 @@ const routes = [
     name: 'category',
     component: () => import('../views/category/index'),
     meta: {
+      keepAlive: true,
       layout: true,
       head: true,
       headReturn: true,
@@ -64,6 +66,7 @@ const routes = [
     name: 'categoryList',
     component: () => import('../views/category/categoryList'),
     meta: {
+      keepAlive: true,
       layout: true,
       head: true,
       headReturn: true,
@@ -74,11 +77,24 @@ const routes = [
     name: 'cart',
     component: () => import('../views/cart/index'),
     meta: {
+      keepAlive: true,
       headReturn: true,
       layout: false,
       head: true,
       requireAuth: true,
       title: '购物车'
+    }
+  }, {
+    path: '/message',
+    name: 'message',
+    component: () => import('../views/message/index'),
+    meta: {
+      keepAlive: true,
+      headReturn: true,
+      layout: false,
+      head: true,
+      requireAuth: true,
+      title: '留言'
     }
   },
   {
@@ -86,6 +102,7 @@ const routes = [
     name: 'user',
     component: () => import('../views/user/index'),
     meta: {
+      keepAlive: true,
       layout: true,
       head: true,
       headReturn: true,
@@ -97,6 +114,7 @@ const routes = [
     name: 'detail',
     component: () => import('../views/goods/detail.vue'),
     meta: {
+      keepAlive: true,
       layout: false,
       head: true,
       headReturn: true,
@@ -108,6 +126,7 @@ const routes = [
     name: 'createOrder',
     component: () => import('../views/order/createOrder'),
     meta: {
+      keepAlive: true,
       requireAuth: true,
       layout: false,
       head: true,
@@ -120,6 +139,7 @@ const routes = [
     name: 'addressList',
     component: () => import('../views/order/addressList'),
     meta: {
+      keepAlive: true,
       requireAuth: true,
       layout: false,
       head: true,
@@ -132,6 +152,7 @@ const routes = [
     name: 'editAddress',
     component: () => import('../views/order/editAddress'),
     meta: {
+      keepAlive: true,
       requireAuth: true,
       layout: false,
       head: true,
@@ -144,6 +165,7 @@ const routes = [
     name: 'orderProduct',
     component: () => import('../views/order/orderProduct'),
     meta: {
+      keepAlive: true,
       requireAuth: true,
       layout: false,
       head: true,
@@ -156,6 +178,7 @@ const routes = [
     name: 'orderList',
     component: () => import('../views/order/orderList'),
     meta: {
+      keepAlive: true,
       requireAuth: true,
       layout: false,
       head: true,
@@ -168,6 +191,7 @@ const routes = [
     name: 'message',
     component: () => import('../views/message/index'),
     meta: {
+      keepAlive: true,
       requireAuth: true,
       layout: false,
       head: true,

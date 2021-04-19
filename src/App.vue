@@ -3,9 +3,16 @@
     <div v-if="$route.meta.head" class="header-nav">
       <headerNav :title="$route.meta.title" />
     </div>
-    <router-view v-if="isRouterAlive" />
-    <div class="tab-bar" >
-      <Tabbar style="z-index: 888888 !important" v-if="$route.meta.layout" />
+
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" />
+        <!-- 这里是会被缓存的视图组件 -->
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive">
+    </router-view>
+
+    <div class="tab-bar">
+      <Tabbar v-if="$route.meta.layout" style="z-index: 888888 !important" />
     </div>
   </div>
 </template>
@@ -21,7 +28,7 @@ export default {
   },
   provide() {
     return {
-      reload: this.reload
+      // reload: this.reload
     }
   },
   data() {

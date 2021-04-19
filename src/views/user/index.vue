@@ -83,7 +83,6 @@ export default {
     }
   },
   created() {
-    console.log('this.guid: ', this.guid)
     if (this.guid === '' || this.guid === undefined) {
       this.loginstatus = '登录'
     } else {
@@ -125,11 +124,9 @@ export default {
             setName('')
             setAvatar('')
             this.$router.go(0)
-            const that = this
 
             this.$store.dispatch('user/FedLogOut')
               .then(() => {
-                console.log('xx')
                 this.toast.success('退出成功')
               }).catch(() => {
 

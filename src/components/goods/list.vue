@@ -88,7 +88,6 @@ export default {
     if (this.type === 'goods') {
       if (this.title === undefined) {
         // this.title = '全部'
-        console.log(111111111111)
       }
       this.getGoodsList()
     }
@@ -216,9 +215,9 @@ export default {
         display: flex;
         // flex-direction: column;
         justify-content: space-between;
-        margin-bottom: 2px;
+        margin-bottom: 20px;
         padding: 0 !important;
-        line-height:18px !important;
+        line-height:18px  !important;
         .goods-img{
             width:170px;
             height: 170px;

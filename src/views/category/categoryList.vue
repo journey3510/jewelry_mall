@@ -1,14 +1,5 @@
 <template>
   <div>
-    <!-- <div>
-      <van-sticky>
-        <van-dropdown-menu>
-          <van-dropdown-item v-model="value1" :options="option1" />
-          <van-dropdown-item v-model="value2" :options="option2" />
-        </van-dropdown-menu>
-      </van-sticky>
-    </div> -->
-
     <van-search
       v-model="search_word"
       placeholder="请输入搜索关键词"
@@ -18,9 +9,11 @@
     />
 
     <!-- 列表 -->
-    <div>
-      <goodsList class="goodsList" :option-id="optionId" :title="title" :type="type" :category="category" :search="word" />
-    </div>
+    <!-- <div> -->
+      <keep-alive>
+        <goodsList class="goodsList" :option-id="optionId" :title="title" :type="type" :category="category" :search="word" />
+      </keep-alive>
+    <!-- </div> -->
   </div>
 </template>
 <script>

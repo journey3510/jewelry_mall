@@ -73,7 +73,6 @@ export default {
 
   methods: {
     onSubmit(val) {
-      console.log('val: ', val)
       this.userRegister()
     },
     phonetest(val) {
