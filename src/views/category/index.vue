@@ -51,8 +51,6 @@ Vue.use(GridItem)
 Vue.use(SidebarItem)
 Vue.use(Sidebar)
 
-// import { categoryList } from '@/api/category'
-
 export default {
 
   data() {
@@ -65,16 +63,20 @@ export default {
     }
   },
   created() {
-    // console.log(config)
     this.goodsSeries()
+  },
+  beforeRouteLeave(to, from, next) {
+    // 设置下一个路由的 meta
+    to.meta.keepAlive = false // 让 A 不缓存，即刷新
+    next()
   },
   methods: {
     onChange(index) {
       Notify({ type: 'primary', message: index })
     },
     click(index) {
+      this.id = index
       if (index !== 3) {
-        this.id = index
         this.speciesOptions = config.speciesOptions[this.id - 1]
       } else {
         this.speciesOptions = JSON.parse(JSON.stringify(this.serielist))
@@ -84,6 +86,9 @@ export default {
       serielist().then(res => {
         if (res.code === 200) {
           this.serielist = res.data
+          this.serielist.forEach(element => {
+            element.id = element.guid
+          })
         }
       })
     }

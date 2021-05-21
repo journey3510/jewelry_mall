@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import { autograph } from '@/utils/autograph'
 
 // 获取商品列表
 export function goodsListApi(data) {

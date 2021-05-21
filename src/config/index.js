@@ -71,25 +71,25 @@ const config = {
     {
       'id': 3,
       'speciesId': 3,
+      'name': '手镯',
+      'cateImg': require('@/assets/images/item/bracelet.jpg')
+    },
+    {
+      'id': 4,
+      'speciesId': 4,
       'name': '吊坠',
       'cateImg': require('@/assets/images/item/pendant.jpg')
     }, {
-      'id': 4,
-      'speciesId': 4,
+      'id': 5,
+      'speciesId': 5,
       'name': '耳环',
       'cateImg': require('@/assets/images/item/earrings.jpg')
     },
     {
-      'id': 5,
-      'speciesId': 5,
-      'name': '手链/脚链',
-      'cateImg': require('@/assets/images/item/1404zvfr20.jpg')
-    },
-    {
       'id': 6,
       'speciesId': 6,
-      'name': '手镯',
-      'cateImg': require('@/assets/images/item/bracelet.jpg')
+      'name': '手链/脚链',
+      'cateImg': require('@/assets/images/item/1404zvfr20.jpg')
     }],
     []
 

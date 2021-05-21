@@ -31,7 +31,7 @@ Vue.use(Toast)
 Vue.use(Button)
 
 export default {
-  inject: ['reload'],
+
   components: {},
   computed: {
     ...mapGetters([

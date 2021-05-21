@@ -19,7 +19,7 @@
             </span>
           </div>
           <div class="order-detail-address">
-            <span>{{ address }}</span>
+            <span :style="address == ''? 'color:red;':''">{{ address | nullAddress }}</span>
           </div>
         </div>
 
@@ -37,7 +37,12 @@
             <swiper-slide>
               <van-badge :content="banner.quantity">
                 <!-- <div class="child" /> -->
-                <img :src="banner.item_info.item_img" width="68px" height="68px">
+                <img
+                  style="border-radius:4px;"
+                  :src="banner.item_info.item_img"
+                  width="68px"
+                  height="68px"
+                >
               </van-badge>
             </swiper-slide>
           </div>
@@ -171,6 +176,14 @@ export default {
   computed: {
     ...mapGetters(['guid'])
   },
+  filters: {
+    nullAddress(val) {
+      if (val === '') {
+        return '请填写地址'
+      }
+      return val
+    }
+  },
   created() {
     this.tempOrder = getTempOrder()
     // 避免 返回
@@ -203,7 +216,7 @@ export default {
       })
     },
     createOrder() {
-      if (this.addres === '') {
+      if (this.address === '') {
         Toast.fail('请编辑地址')
         return
       }
@@ -286,10 +299,6 @@ export default {
 </script>
 
 <style>
-
-.order-main {
-
-}
 
 .order-address {
   width: 94%;
@@ -398,9 +407,8 @@ export default {
 }
 
 .order-product-to span {
-
   line-height: 90px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .pay-code-div {

@@ -99,15 +99,12 @@ export default {
 
       register(data).then(res => {
         if (res.ServerNo === 200) {
-          this.userToken = res.data
-          // 将用户token保存到vuex中
-          this.changeLogin({ Authorization: this.userToken })
           Toast.success('注册成功')
           setTimeout(() => {
             this.$router.push('/login')
           }, 500)
         } else {
-          Toast.fail(res)
+          Toast.fail('注册失败')
         }
       })
     },

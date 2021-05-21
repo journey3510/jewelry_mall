@@ -34,7 +34,7 @@
 
         <div style="margin-bottom: 15px;">
           <span>￥</span>
-          <span>{{ parseInt(goodsDetail.price).toFixed(2) }}</span>
+          <span>{{ parseFloat(goodsDetail.price).toFixed(2) }}</span>
         </div>
       </div>
     </div>
@@ -89,7 +89,6 @@
         <div class="access-name">
           <p style="margin-bottom: 5px;">{{ item.username }}</p>
           <p>{{ item.add_time | timestampToTime }}</p>
-          <!-- <van-rate v-model="item.branch" style="z-index: -1 !important" /> -->
         </div>
       </div>
       <div class="access-text">
@@ -157,17 +156,12 @@ export default {
       showBase: false,
 
       sku: {
-        // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
-        // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
         tree: [],
         list: [],
         price: 0,
         stock_num: 0
-        // none_sku: false,
-        // hide_stock: false
       },
       goods: {
-        // 默认商品 sku 缩略图
         picture: ''
       },
       goodsId: '',

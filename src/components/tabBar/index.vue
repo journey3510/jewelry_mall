@@ -1,5 +1,13 @@
 <template>
-  <van-tabbar v-model="active" active-color="#1989fa" style="z-index: 1999; position: fixed " placeholder safe-area-inset-bottom fixed route>
+  <van-tabbar
+    v-model="active"
+    active-color="#1989fa"
+    style="z-index: 1999; position: fixed "
+    placeholder
+    safe-area-inset-bottom
+    fixed
+    route
+  >
     <van-tabbar-item icon="shop-o" to="/home">首页</van-tabbar-item>
     <van-tabbar-item icon="apps-o" to="/category">分类</van-tabbar-item>
     <van-tabbar-item icon="shopping-cart-o" to="/cart">购物车</van-tabbar-item>
@@ -12,7 +20,7 @@ import { Tabbar, TabbarItem } from 'vant'
 
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
-// import Item from './item.vue'
+
 export default {
   components: {
     // Item
@@ -52,12 +60,7 @@ export default {
     }
   },
   methods: {
-    // onChange(index) {
-    //   Notify({ type: 'primary', message: index });
-    // },
-    // getVal: function (res) {
-    //   this.selected = res
-    // }
+
   }
 }
 </script>

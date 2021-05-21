@@ -5,11 +5,12 @@
     </div>
 
     <keep-alive>
+      <!-- 这里是会被缓存的视图组件，比如 Home！ -->
       <router-view v-if="$route.meta.keepAlive" />
-        <!-- 这里是会被缓存的视图组件 -->
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive">
-    </router-view>
+
+    <!-- 这里是不被缓存的视图组件，比如 Edit！ -->
+    <router-view v-if="!$route.meta.keepAlive" />
 
     <div class="tab-bar">
       <Tabbar v-if="$route.meta.layout" style="z-index: 888888 !important" />
@@ -26,23 +27,24 @@ export default {
     Tabbar,
     headerNav
   },
-  provide() {
-    return {
-      // reload: this.reload
-    }
-  },
-  data() {
-    return {
-      isRouterAlive: true
+  data: () => ({
+    include: []
+  }),
+
+  watch: {
+    $route(to, from) {
+      // if (to.meta.keepAlive) {
+      //   !this.include.includes(to.name) && this.include.push(to.name)
+      // }
+
+      // if (from.meta.keepAlive && to.meta.deepth < from.meta.deepth) {
+      //   const index = this.include.indexOf(from.name)
+      //   index !== -1 && this.include.splice(index, 1)
+      // }
     }
   },
   methods: {
-    reload() {
-      this.isRouterAlive = false
-      this.$nextTick(() => {
-        this.isRouterAlive = true
-      })
-    }
+
   }
 }
 </script>

@@ -32,13 +32,6 @@ export function receipt(data) {
   })
 }
 
-export function findCoupon() {
-  return request({
-    url: '/api/client/coupon/findCoupon',
-    method: 'post'
-  })
-}
-
 export function findOrderList(data) {
   return request({
     url: '/api/client/order/findOrderList',

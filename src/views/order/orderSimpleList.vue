@@ -231,8 +231,6 @@ export default {
       })
     },
     evaluation(item_guid, order_num) {
-      // Toast('正在开发中')
-
       this.$router.push({ path: '/message',
         query: {
           order_num,

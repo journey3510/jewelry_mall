@@ -45,13 +45,3 @@ export function findCart(data) {
   })
 }
 
-// 查询购物车
-export function selectAll(selectAll) {
-  return request({
-    url: '/api/client/cart/selectAll',
-    method: 'post',
-    data: {
-      selectAll: selectAll
-    }
-  })
-}

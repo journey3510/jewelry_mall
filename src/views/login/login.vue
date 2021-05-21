@@ -64,7 +64,6 @@ export default {
       this.userLogin()
     },
     phonetest(val) {
-      console.log('val: ', val)
       return /^[1]([3-9])[0-9]{9}$/.test(val)
     },
     toregister() {

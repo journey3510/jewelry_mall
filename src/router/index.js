@@ -4,15 +4,9 @@ import Cookies from 'js-cookie'
 
 Vue.use(VueRouter)
 
-// 解决重复点击导航路由报错
-// const originalPush = VueRouter.prototype.push
-// VueRouter.prototype.push = function push(location) {
-//   return originalPush.call(this, location).catch(err => err)
-// }
 const routes = [
   {
     path: '/',
-    name: 'Home',
     redirect: '/home'
   },
   {
@@ -54,11 +48,12 @@ const routes = [
     name: 'category',
     component: () => import('../views/category/index'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       layout: true,
       head: true,
       headReturn: true,
-      title: '分类'
+      title: '分类',
+      deepth: 2
     }
   },
   {
@@ -70,14 +65,15 @@ const routes = [
       layout: true,
       head: true,
       headReturn: true,
-      title: '分类'
+      title: '商品列表',
+      deepth: 3
     }
   }, {
     path: '/cart',
     name: 'cart',
     component: () => import('../views/cart/index'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       headReturn: true,
       layout: false,
       head: true,
@@ -89,7 +85,7 @@ const routes = [
     name: 'message',
     component: () => import('../views/message/index'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       headReturn: true,
       layout: false,
       head: true,
@@ -102,7 +98,7 @@ const routes = [
     name: 'user',
     component: () => import('../views/user/index'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       layout: true,
       head: true,
       headReturn: true,
@@ -114,11 +110,12 @@ const routes = [
     name: 'detail',
     component: () => import('../views/goods/detail.vue'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       layout: false,
       head: true,
       headReturn: true,
-      title: '商品详情'
+      title: '商品详情',
+      deepth: 4
     }
   },
   {
@@ -126,7 +123,7 @@ const routes = [
     name: 'createOrder',
     component: () => import('../views/order/createOrder'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       requireAuth: true,
       layout: false,
       head: true,
@@ -135,37 +132,11 @@ const routes = [
     }
   },
   {
-    path: '/order/addressList',
-    name: 'addressList',
-    component: () => import('../views/order/addressList'),
-    meta: {
-      keepAlive: true,
-      requireAuth: true,
-      layout: false,
-      head: true,
-      headReturn: true,
-      title: '地址列表'
-    }
-  },
-  {
     path: '/order/editAddress',
     name: 'editAddress',
     component: () => import('../views/order/editAddress'),
     meta: {
-      keepAlive: true,
-      requireAuth: true,
-      layout: false,
-      head: true,
-      headReturn: true,
-      title: '编辑地址'
-    }
-  },
-  {
-    path: '/order/orderProduct',
-    name: 'orderProduct',
-    component: () => import('../views/order/orderProduct'),
-    meta: {
-      keepAlive: true,
+      keepAlive: false,
       requireAuth: true,
       layout: false,
       head: true,
@@ -178,25 +149,12 @@ const routes = [
     name: 'orderList',
     component: () => import('../views/order/orderList'),
     meta: {
-      keepAlive: true,
+      keepAlive: false,
       requireAuth: true,
       layout: false,
       head: true,
       headReturn: true,
       title: '订单列表'
-    }
-  },
-  {
-    path: '/user/message',
-    name: 'message',
-    component: () => import('../views/message/index'),
-    meta: {
-      keepAlive: true,
-      requireAuth: true,
-      layout: false,
-      head: true,
-      headReturn: true,
-      title: '消息列表'
     }
   }
 ]

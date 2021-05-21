@@ -7,12 +7,6 @@
       @search="onSearch"
       @cancel="onCancel"
     />
-    <!-- <homeSwiper /> -->
-    <!-- <navLink /> -->
-
-    <!-- <div class="banner-img">
-      <img src="" alt="" @click="onImgClick">
-    </div> -->
 
     <van-notice-bar
       color="#1989fa"
@@ -27,9 +21,13 @@
 </template>
 
 <script>
-// import homeSwiper from '../components/swiper'
-// import navLink from '../components/navLink'
+
 import goodsList from '../components/goods/list'
+
+import { Swipe, SwipeItem } from 'vant'
+
+Vue.use(Swipe)
+Vue.use(SwipeItem)
 
 import Vue from 'vue'
 import { Toast } from 'vant'
@@ -39,21 +37,21 @@ Vue.use(NoticeBar)
 export default {
   name: 'Home',
   components: {
-    // homeSwiper,
-    // navLink,
     goodsList
   },
   data() {
     return {
       search_word: '',
-      type1: 'goods'
+      type1: 'goods',
+
+      list: []
     }
   },
   computed: {
 
   },
   created() {
-
+    // this.load()
   },
   mounted() {
 
@@ -63,7 +61,6 @@ export default {
       Toast('coding... 请选择其他商品')
     },
     onSearch(val) {
-      // Toast(val)
       if (val !== '') {
         this.$router.push({
           name: 'categoryList',
@@ -74,17 +71,16 @@ export default {
     onCancel() {
       Toast('取消')
     }
+
   }
 }
 </script>
 
 <style lang="less" scoped>
   .banner-img{
-    //margin: 10px;
-    //height: 96px;
+
     border-radius: 10px;
     background: #F5F5F5 !important;
-    /*overflow: hidden;*/
     img{
       width: 100%;
       height:100%;
@@ -92,6 +88,15 @@ export default {
   }
   .goodslist /deep/ .goods-item {
     margin-bottom: 20px;
+  }
+
+  //
+    .my-swipe .van-swipe-item {
+    color: #fff;
+    font-size: 20px;
+    line-height: 150px;
+    text-align: center;
+    background-color: #39a9ed;
   }
 
 </style>

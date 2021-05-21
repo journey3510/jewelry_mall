@@ -31,7 +31,6 @@ const actions = {
     const { phone, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ phone: phone.trim(), password: password.trim() }).then(response => {
-        // console.log('response: ', response)
         if (response.code === 200) {
           setToken(response.ResultData.token)
           setGuid(response.ResultData.guid)

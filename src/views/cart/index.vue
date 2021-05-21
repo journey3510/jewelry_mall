@@ -1,7 +1,7 @@
 <template>
   <div class="cart-container">
     <ul class="cart-list">
-      <van-checkbox-group ref="checkboxGroup" v-model="result" @change="changeGroup">
+      <van-checkbox-group ref="checkboxGroup" v-model="result" >
         <li v-for="(item,index) in list" :key="index" class="item">
           <van-swipe-cell class="van-swipe-cell">
             <van-card
@@ -44,12 +44,9 @@
         :button-text="btn_text"
         :loading="loading"
         @submit="onSubmit"
-      >
-        <!-- <van-checkbox v-model="check" @click="checkAll">全选</van-checkbox> -->
-      </van-submit-bar>
-
+      />
     </div>
-    <!-- {{ list }} -->
+
   </div>
 </template>
 <script>
@@ -63,10 +60,9 @@ import {
 
 Vue.use(Tag)
 Vue.use(Toast)
-import { addCartNum, deleteCart, findCart, selectCart } from '../../api/cart'
+import { addCartNum, deleteCart, findCart } from '../../api/cart'
 
 export default {
-  inject: ['reload'],
   components: {},
   computed: {
     ...mapGetters([
@@ -128,30 +124,25 @@ export default {
         })
       })
     },
-    change(item) {
-      let check = false
-      if (item.checked === true) {
-        check = false
-      } else {
-        check = true
-      }
-      selectCart(item.sku, check).then(res => {
-        const array = []
-        this.total = res.data.total * 100
-        this.list = res.data.cartEntries
-        for (const i in this.list) {
-          if (this.list[i].checked) {
-            array.push(this.list[i].sku)
-          }
-        }
-        this.check = res.data.selectAll
-        // if (res.data.totalNum !== 0) {
-        //   this.btn_text = '提交订单' + '(' + res.data.totalNum + ')'
-        // } else {
-        //   this.btn_text = '提交订单'
-        // }
-      })
-    },
+    // change(item) {
+    //   let check = false
+    //   if (item.checked === true) {
+    //     check = false
+    //   } else {
+    //     check = true
+    //   }
+    //   selectCart(item.sku, check).then(res => {
+    //     const array = []
+    //     this.total = res.data.total * 100
+    //     this.list = res.data.cartEntries
+    //     for (const i in this.list) {
+    //       if (this.list[i].checked) {
+    //         array.push(this.list[i].sku)
+    //       }
+    //     }
+    //     this.check = res.data.selectAll
+    //   })
+    // },
 
     onClose(item_guid) {
       deleteCart({ 'user_guid': this.guid, 'item_guid': item_guid }).then(res => {

@@ -2,20 +2,7 @@
   <div class="goods-container">
     <div class="goods-title">
       <div class="after" />
-      {{ title }}
-    </div>
-    <div v-if="type=='navImg'" class="nav-img">
-      <van-swipe
-        :autoplay="3000"
-      >
-        <van-swipe-item
-          class="swipe-item"
-        >
-          <div v-for="(item,index) in list" :key="index" class="item">
-            <img :src="item" alt="">
-          </div>
-        </van-swipe-item>
-      </van-swipe>
+      {{ showtitle }}
     </div>
 
     <van-list
@@ -40,7 +27,7 @@
                 {{ item.name }}
               </div>
               <div class="info">
-                <div class="price"><span>￥</span><span>{{ item.price }}</span></div>
+                <div class="price"><span>￥</span><span>{{ parseFloat( item.price).toFixed(2) }}</span></div>
                 <div class="cart-icon">
                   <img :src="addcatrImg" alt="">
                 </div>
@@ -70,24 +57,31 @@ export default {
       goodsList: [],
       finished: false,
       addcatrImg: require('../../assets/images/addcatr.png'),
-      word: this.search
+      word: this.search,
+      showtitle: ''
     }
   },
   watch: {
     search: {
       handler(n, o) {
+        if (n === o || n.trim() === '') {
+          return
+        }
         this.word = n
         this.goodsList = []
-        this.title = '搜索结果'
+        this.showtitle = '搜索结果'
         this.searchList()
       },
       deep: true // 深度监听父组件传过来对象变化
     }
   },
+
   created() {
     if (this.type === 'goods') {
       if (this.title === undefined) {
-        // this.title = '全部'
+        this.showtitle = '全部'
+      } else {
+        this.showtitle = this.title
       }
       this.getGoodsList()
     }
@@ -126,10 +120,9 @@ export default {
       const params = {
         pageSize,
         pageNum,
-        'name': word
+        'name': word.trim()
       }
       goodsSearch(params).then(res => {
-        console.log('res: ', res)
         if (res.code === 200) {
           this.vantLoading = false
           const goodsList = this.goodsList || []
@@ -165,7 +158,7 @@ export default {
         align-items: center;
         padding-left: 13px;
         box-sizing: border-box;
-        width:132px;
+
         font-size:16px;
         font-weight:500;
         color:rgba(151,118,80,1);

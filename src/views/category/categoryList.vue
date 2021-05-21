@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-search
-      v-model="search_word"
+      v-model="word"
       placeholder="请输入搜索关键词"
       input-align="center"
       @search="onSearch"
@@ -9,11 +9,7 @@
     />
 
     <!-- 列表 -->
-    <!-- <div> -->
-      <keep-alive>
-        <goodsList class="goodsList" :option-id="optionId" :title="title" :type="type" :category="category" :search="word" />
-      </keep-alive>
-    <!-- </div> -->
+    <goodsList class="goodsList" :option-id="optionId" :title="title" :type="type" :category="category" :search="word" />
   </div>
 </template>
 <script>
@@ -28,6 +24,7 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 
 export default {
+  name: 'CategoryList',
   components: {
     goodsList
   },
@@ -36,28 +33,14 @@ export default {
       optionId: '',
       title: '',
       category: '',
-      value1: 0,
-      value2: 'a',
-      option1: [
-        { text: '全部商品', value: 0 },
-        { text: '新款商品', value: 1 },
-        { text: '活动商品', value: 2 }
-      ],
-      option2: [
-        { text: '默认排序', value: 'a' },
-        { text: '好评排序', value: 'b' },
-        { text: '销量排序', value: 'c' }
-      ],
       type: 'goods',
-      search_word: '',
       word: ''
     }
   },
 
   created() {
-    // console.log('this.$route.params.search_word: ', typeof this.$route.params.search_word)
     if (this.$route.params.search_word !== undefined) {
-      this.search_word = this.$route.params.search_word
+      this.word = this.$route.params.search_word
       this.type = 'search'
       this.title = '搜索结果'
       return
