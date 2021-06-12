@@ -10,7 +10,7 @@
 
     <div class="my-order">
       <div class="my-order-cell">
-        <van-cell title="我的订单" value="查看全部订单" is-link to="/order/orderList" title-class="my-order-list" size="16px" />
+        <van-cell title="我的订单" value="查看订单" is-link to="/order/orderList" title-class="my-order-list" size="16px" />
       </div>
       <div>
         <van-grid :border="false" icon-size="22px" :column-num="4">
@@ -42,7 +42,6 @@ import { Swipe, SwipeItem } from 'vant'
 import { Lazyload, Dialog } from 'vant'
 import { Divider } from 'vant'
 
-import { personCenter } from '../../api/user'
 import { mapGetters } from 'vuex'
 import { setGuid, setToken, setName, setAvatar } from '@/utils/auth'
 
@@ -91,24 +90,7 @@ export default {
   },
 
   methods: {
-    personCenter() {
-      personCenter().then(res => {
-        this.nickname = res.data.data.user.userName
-        this.headImg = res.data.data.user.headImg
-        if (res.data.data.tobePay > 0) {
-          this.tobePay = res.data.data.tobePay
-        }
-        if (res.data.data.tobeDelivered > 0) {
-          this.tobeDelivered = res.data.data.tobeDelivered
-        }
-        if (res.data.data.received > 0) {
-          this.received = res.data.data.received
-        }
-        if (res.data.data.pay > 0) {
-          this.pay = res.data.data.pay
-        }
-      })
-    },
+
     goOrderList() {
       this.$router.push({ path: '/order/orderList' })
     },

@@ -9,13 +9,17 @@
         <van-tab title="待发货">
           <orderSimpleList :key="timer" :status="2" class="orderSimpleList" />
         </van-tab>
+
         <van-tab title="待收货">
           <orderSimpleList :key="timer" :status="3" class="orderSimpleList" />
-
         </van-tab>
-        <van-tab title="待评价">
-          <orderSimpleList :key="timer" :status="4" class="orderSimpleList" />
 
+        <van-tab title="评价">
+          <orderSimpleList :key="timer" :status="4" class="orderSimpleList" />
+        </van-tab>
+
+        <van-tab title="全部">
+          <orderSimpleList :key="timer" :status="5" class="orderSimpleList" />
         </van-tab>
       </van-tabs>
 
@@ -80,20 +84,11 @@ export default {
     },
     beforeChange(index) {
       this.active = index
-
-      // this.$router.push({
-      //   params: merge(this.$route.params, { 'id': '1' })
-      // })
-
-      // const params = Object.assign({ active: index }, this.$route.params)
-
       this.$router.push({
         params: {
           active: index
         }
       })
-
-      // this.$route.params.active = index
     }
   }
 }

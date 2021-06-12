@@ -1,7 +1,7 @@
 <template>
   <div class="cart-container">
     <ul class="cart-list">
-      <van-checkbox-group ref="checkboxGroup" v-model="result" >
+      <van-checkbox-group ref="checkboxGroup" v-model="result">
         <li v-for="(item,index) in list" :key="index" class="item">
           <van-swipe-cell class="van-swipe-cell">
             <van-card
@@ -124,25 +124,6 @@ export default {
         })
       })
     },
-    // change(item) {
-    //   let check = false
-    //   if (item.checked === true) {
-    //     check = false
-    //   } else {
-    //     check = true
-    //   }
-    //   selectCart(item.sku, check).then(res => {
-    //     const array = []
-    //     this.total = res.data.total * 100
-    //     this.list = res.data.cartEntries
-    //     for (const i in this.list) {
-    //       if (this.list[i].checked) {
-    //         array.push(this.list[i].sku)
-    //       }
-    //     }
-    //     this.check = res.data.selectAll
-    //   })
-    // },
 
     onClose(item_guid) {
       deleteCart({ 'user_guid': this.guid, 'item_guid': item_guid }).then(res => {
@@ -153,14 +134,6 @@ export default {
           Toast.fail('删除失败')
         }
       })
-    },
-    changeGroup(e) {
-      const { list } = this
-      if (list.length === e.length) {
-        this.checked = true
-      } else {
-        this.checked = false
-      }
     },
 
     // 添加数量

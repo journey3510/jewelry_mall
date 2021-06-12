@@ -1,4 +1,4 @@
-function dataConvert(input) {
+export function dataConvert(input) {
   var d = new Date(input)
   var year = d.getFullYear()
   var month = d.getMonth() < 9 ? '0' + (d.getMonth() + 1) : '' + (d.getMonth() + 1)

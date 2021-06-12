@@ -50,7 +50,7 @@
                   v-else
                   class="evaluation_btn"
                   type="default"
-                  @click="evaluation(child.item_guid, items.order_num)"
+                  disabled
                 >已评</van-button>
               </div>
             </div>
@@ -116,29 +116,12 @@ export default {
       loading: false,
       finished: false,
       refreshing: false,
-      pageSize: 5,
+      pageSize: 4,
       error: false,
       pageNumber: 1,
       active: 0,
       total: 1,
-      orderList: [
-        {
-          order: {
-            order_num: '',
-            timeStr: '',
-            orderStatus: 0,
-            payAmount: '',
-            totalNum: 0,
-            number: 0
-          },
-          time: 0,
-          orderLine: {
-            productName: '',
-            price: '',
-            quantity: ''
-          }
-        }
-      ]
+      orderList: []
     }
   },
   computed: {
@@ -163,24 +146,18 @@ export default {
           for (let i = 0; i < list.length; i++) {
             list[i].orderinfo = JSON.parse(list[i].orderinfo)
           }
-
           if (list == null) {
             this.finished = true
             return
           }
+          this.orderList = [...this.orderList, ...list]
+          this.pageNumber++
+
           if (list.length < this.pageSize) {
-            this.orderList = list
             this.finished = true
+            this.loading = false
             return
-          } else {
-            if (this.pageNumber > 1) {
-              this.orderList = [...this.orderList, ...list]
-            } else {
-              this.orderList = list
-            }
-            this.pageNumber++
           }
-          this.total = list[0].total
         } else {
           this.error = true
         }
@@ -207,7 +184,7 @@ export default {
             if (res.code) {
               Toast.success('支付成功')
               setTimeout(() => {
-                this.onLoad()
+                this.onRefresh()
               }, 300)
             } else {
               Toast.fail('支付失败')
@@ -225,7 +202,7 @@ export default {
         if (res.code === 200) {
           Toast.success('收货成功')
           setTimeout(() => {
-            this.onLoad()
+            this.onRefresh()
           }, 300)
         }
       })

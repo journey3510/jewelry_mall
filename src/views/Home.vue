@@ -16,7 +16,7 @@
       text="新的商品上架了，快来看看"
     />
 
-    <goodsList class="goodslist" :title="'推荐商品'" :type="'goods'" />
+    <goodsList class="goodslist" :title="'最新商品'" :type="'goods'" />
   </div>
 </template>
 

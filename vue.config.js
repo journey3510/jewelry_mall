@@ -38,7 +38,7 @@ module.exports = {
     }
     // proxy: {
     //   '/api': {
-    //     target: 'https://lvsoso.com', // 要访问的接口域名
+    //     target: 'https://journey.com', // 要访问的接口域名
     //     // ws: true, // 是否启用websockets
     //     changeOrigin: true,
     //     pathRewrite: {

@@ -44,7 +44,7 @@ const actions = {
         } else {
           reject('')
         }
-        // localStorage.setItem('Authorization', response.ResultData.token)
+
         resolve()
       }).catch(error => {
         reject(error)

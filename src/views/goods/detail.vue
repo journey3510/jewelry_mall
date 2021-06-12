@@ -30,7 +30,6 @@
           <span v-if="goodsDetail.texture == 6" class="labelshow">K金</span>
           <span v-if="goodsDetail.texture == 7" class="labelshow">珍珠</span>
         </div>
-        <!-- <div class="h3">{{ goodsDetail.name }}</div> -->
 
         <div style="margin-bottom: 15px;">
           <span>￥</span>
@@ -218,7 +217,6 @@ export default {
         'item_guid': data.goodsId,
         'quantity': data.selectedNum
       }
-
       addCart(info).then(res => {
         if (res.code === 200) {
           Toast.success(res.data)

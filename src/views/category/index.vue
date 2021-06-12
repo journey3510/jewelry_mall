@@ -39,11 +39,8 @@
 <script>
 import Vue from 'vue'
 import { Sidebar, SidebarItem } from 'vant'
-import { Notify } from 'vant'
 import { Grid, GridItem } from 'vant'
-
 import { config } from '@/config/index.js'
-
 import { serielist } from '@/api/goods.js'
 
 Vue.use(Grid)
@@ -71,9 +68,6 @@ export default {
     next()
   },
   methods: {
-    onChange(index) {
-      Notify({ type: 'primary', message: index })
-    },
     click(index) {
       this.id = index
       if (index !== 3) {
